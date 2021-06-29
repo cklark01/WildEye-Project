@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>WildEye</title>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="navbar__container">
+                <a href="index.html" id="navbar__logo">WildEye</a>
+                <div class="navbar__toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="navbar__menu">
+                    <li class="navbar__item">
+                        <a href="index.html" class="navbar__links">Dashboard</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="data.html" class="navbar__links">Data</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="control1.html" class="navbar__links">Control</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="export.html" class="navbar__links">Export</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="live.html" class="navbar__links">Live</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+           
+        <!-- Info Section-->
+        <div class="main">
+            <div class="main__container" >
+                <div class="main__select">
+                    <form action="/action_page.php">
+                        <label for="cars">Choose a AnimalID:</label>
+                        <select name="cars" id="cars">
+                          <option value="tagid">0100</option>
+                          <option value="tagid">1010</option>
+                          <option value="tagid">0001</option>
+                          <option value="tagid">0002</option>
+                        </select>
+                        <input type="submit" value="Submit">
+                      </form>
+                </div>
+                <div class="main__info" >
+                    <div class="boxes">
+                        <h1>Started At</h1>
+                        <div class="boxes__info">
+                            <h2><p><span id="started"></span></p></h2>
+                        </div>
+                    </div>
+                    <div class="boxes">
+                        <h1>Working For</h1>
+                        <div class="boxes__info">
+                            <h2><p><span id="workingHours"></span></p></h2>
+                        </div>
+                    </div>
+                    <div class="boxes">
+                        <h1>Storage Remaining</h1>
+                        <div class="boxes__info">
+                            <h2><p><span id="sdFree"></span></p>GB of 32GB</h2>
+                        </div>
+                    </div> <div class="boxes">
+                        <h1>TagID</h1>
+                        <div class="boxes__info">
+                            <h2><p><span id="id"></span></p></h2>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="main__images" >              
+                        <div class="hvrbox">
+                            <img src="images/thermometer.png"  class="hvrbox-layer_bottom">
+                            <div class="hvrbox-layer_top">
+                                <div class="hvrbox-text">
+                                    <p><span id="temp"></span>&deg;</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                        <div class="hvrbox">
+                            <img src="images/lighting.png"  class="hvrbox-layer_bottom">
+                            <div class="hvrbox-layer_top">
+                                <div class="hvrbox-text">
+                                    <p><span id="batt"></span>%</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                        <div class="hvrbox">
+                            <img src="images/sd-card.png"  class="hvrbox-layer_bottom">
+                            <div class="hvrbox-layer_top">
+                                <div class="hvrbox-text">
+                                    <p><span id="sdCard"></span>GB</p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Section -->
+        <div id="dashboard_table">
+        
+        </div> 
+        
+        
+        <script src="app.js" ></script>
+
+     
+
+        <script>
+            fetch('/getTemp').then(response => {
+                return response.text();
+            }).then(data => {
+                document.getElementById('temp').textContent = data;
+            });
+
+            fetch('/getStarted').then(response => {
+                return response.text();
+            }).then(data => {
+                document.getElementById('started').textContent = data;
+            });
+
+            fetch('/getBatt').then(response => {
+                return response.text();
+            }).then(data => {
+                document.getElementById('batt').textContent = data;
+            });
+
+            fetch('/getSdCard').then(response => {
+                return response.text();
+            }).then(data => {
+                document.getElementById('sdCard').textContent = data;
+            });
+            
+        </script>
+
+    </body>
+</html>
+
+
+<script>
+    $(document).ready(function(){
+     
+        $.ajax({
+         url:"http://localhost:8888/public/data.php",
+         dataType:"text",
+         success:function(data)
+         {
+            console.log(data);
+            console.log(JSON.parse(data));
+            
+            let myTable = document.querySelector('#dashboard_table');
+
+
+            let employees = JSON.parse(data);
+
+            let headers = ['ID','Date', 'Time', 'Temp', 'Hum', 'Ax','Ay','Az','Latitude ','Longitude','Battery Percentage', 'Sd Card'];
+
+           
+            let table = document.createElement('table');
+            let headerRow = document.createElement('tr');
+
+            headers.forEach(headerText => {
+                let header = document.createElement('th');
+                let textNode = document.createTextNode(headerText);
+                header.appendChild(textNode);
+                headerRow.appendChild(header);
+            });
+
+            table.appendChild(headerRow);
+
+            employees.forEach(emp => {
+                let row = document.createElement('tr');
+
+                Object.values(emp).forEach(text => {
+                    let cell = document.createElement('td');
+                    let textNode = document.createTextNode(text);
+                    cell.appendChild(textNode);
+                    row.appendChild(cell);
+                })
+
+                table.appendChild(row);
+            });
+
+            myTable.appendChild(table);
+        
+         }
+        });
+       });
+     
+    
+    </script>

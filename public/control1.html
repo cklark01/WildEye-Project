@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style3_1.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>Control</title>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="navbar__container">
+                <a href="index.html" id="navbar__logo">WildEye</a>
+                <div class="navbar__toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="navbar__menu">
+                    <li class="navbar__item">
+                        <a href="index.html" class="navbar__links">Dashboard</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="data.html" class="navbar__links">Data</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="control1.html" class="navbar__links">Control</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="export.html" class="navbar__links">Export</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="live.html" class="navbar__links">Live</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    
+        <!-- Control menu -->
+        
+           
+        <div class="row">
+            <div class="col-7">
+                <div class="con">
+                    
+                        <form action="/action_page.php" >
+                            <h2>Sensor's Parameteres</h2>
+                            <div class="input-container">
+                                <div class="icon">
+                                    <img src="images/thermometer.png" >
+                                    <div class="switch_box">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                      </label>
+                                    </div>
+                            </div>
+                                <input class="input-field" type="text" placeholder="Thermometer's Record Time (Minutes)" name="usrnm">
+                            </div>
+                        
+                            <div class="input-container">
+                                <div class="icon">
+                                    <img src="images/gps.png" >
+                                    <div class="switch_box">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                      </label>
+                                    </div>
+                                </div>
+                              <input class="input-field" type="text" placeholder="GPS Record Time (Minutes)" name="email">
+                            </div>
+                            
+                            <div class="input-container">
+                                <div class="icon">
+                                    <img src="images/video-camera.png" >
+                                    <div class="switch_box">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                      </label>
+                                    </div>
+                                </div>
+                              <input class="input-field" type="text" placeholder="Camera's Record Time (Minutes)" name="psw">
+                            </div>
+                            <div class="input-container">
+                                
+                                <input class="input-field" type="text" placeholder="Camera Triggers (Minutes)" name="psw">
+                            </div>
+
+                            <div class="input-container">
+                                <div class="icon">
+                                    <img src="images/acceleration.png" >
+                                    <div class="switch_box">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                      </label>
+                                    </div>
+                                </div>
+                                <input class="input-field" type="text" placeholder="Accelerometer's Record Time (Miliseconds)" name="psw">
+                            </div>
+
+                            
+                            <div class="btns">
+                                <button type="submit" class="btn">Submit</button>
+                                <button type="submit" class="btn">Receive Parameters</button>
+                            </div>
+                            
+                          </form>
+                </div>
+                </div>
+            
+                <div class="col-5">
+                <div class="parameters_board">
+                        <form action="/action_page.php">
+                            <h2>Board's Parameteres</h2>
+                            <div class="input-container">
+                                <label for="cars">Choose a Device ID:</label>
+                                <select name="cars" id="cars">
+                                  <option value="tagid">0100</option>
+                                  <option value="tagid">1010</option>
+                                  <option value="tagid">0001</option>
+                                  <option value="tagid">0002</option>
+                                </select>
+                               
+                                    <button class="btn"><i class="fa fa-power-off"></i> Turn Off</button>
+                                    <button type="submit" class="btn"><i class="fa fa-power-off"></i> Turn On</button>
+                                
+                            </div>
+
+                           
+                            
+
+                            <div class="input-container">
+                                <div class="turnon">
+                                    <input id="input-field" type="text" placeholder="Minutes from now" name="psw">
+                                    <input id="input-field" type="date">
+                                    <input id="input-field" type="time">
+                                    <button type="submit" class="btn"> Scheduled Deactivation</button>
+                                </div>
+                                <div class="Sutdown">
+                                    <input id="input-field" type="text" placeholder="Minutes from now" name="psw">
+                                    <input id="input-field" type="date">
+                                    <input id="input-field" type="time">
+                                    <div class="btns">
+                                    <button type="submit" class="btn"> Scheduled Activation</button>
+                                    </div>
+                                </div>
+                      
+                            </div>
+                          
+                            
+                          </form>
+                </div>
+                </div>
+                </div>
+            </div>
+
+            
+            
+        
+        <!--  -->
+    </body>
+</html>
